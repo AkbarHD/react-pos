@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
          $middleware->web(append: [
-            HandleInertiaRequests::class,
+            HandleInertiaRequests::class, // ambil dari app/Http/Middleware/HandleInertiaRequests.php
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
