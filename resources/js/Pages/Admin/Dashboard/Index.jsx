@@ -27,8 +27,12 @@ const ICONS = {
   totalSuppliers: 'bi bi-truck'
 };
 
+// Fungsi untuk memeriksa apakah data kosong
+// Data dianggap kosong jika tidak ada atau jika array atau objek tersebut kosong
 const isEmpty = (data) => !data || (Array.isArray(data) ? data.length === 0 : Object.keys(data).length === 0);
 
+// Komponen untuk menampilkan kartu statistik
+// Menerima props seperti warna, ikon, judul, dan nilai
 const StatCard = ({ color, icon, title, value }) => (
   <div className="col-6 col-md-4 col-lg-4 mb-3">
     <div
@@ -47,6 +51,9 @@ const StatCard = ({ color, icon, title, value }) => (
   </div>
 );
 
+// Komponen untuk menampilkan kartu chart
+// Menerima props seperti judul, children (untuk chart), dan pesan jika data kosong
+// Jika children tidak diberikan, akan menampilkan pesan kosong
 const ChartCard = ({ title, children, emptyMessage }) => (
   <div className="card shadow border-0 h-100">
     <div className="card-body">
@@ -67,6 +74,9 @@ const STAT_PERMISSION_MAP = {
 
 export default function Dashboard() {
 
+    // Mengambil data dari props yang diberikan oleh Inertia
+  // Gunakan usePage untuk mendapatkan data yang dikirim dari server
+  // Pastikan data ini sudah tersedia di controller sebelum dikirim ke view
   const { stats, transactionData, salesData, productsData, categoryData } = usePage().props;
 
   // Ubah data status transaksi agar sesuai dengan Recharts (name, value)
@@ -84,6 +94,7 @@ export default function Dashboard() {
 
           {/* Bagian Kartu Statistik */}
           <div className="row g-3">
+            {/* perbadaan key dan i key : key = totalSales, i = 0 */}
             {Object.keys(stats).map((key, i) => {
               const permission = STAT_PERMISSION_MAP[key];
               if (!permission) return null;
@@ -103,10 +114,12 @@ export default function Dashboard() {
           </div>
 
           {/* Pesan jika data transaksi kosong */}
+          {/* Jika data transaksi kosong, tampilkan pesan */}
           {isEmpty(transactionData) && (
             <div className="alert alert-warning my-4">Data transaksi kosong. Tambahkan data terlebih dahulu.</div>
           )}
 
+        {/* Bagian Kartu Chart jika ada data */}
           {/* Charts */}
           <div className="row g-4 my-4">
             {/* Chart Pie: Status Transaksi */}

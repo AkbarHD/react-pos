@@ -10,6 +10,9 @@ import '../css/style.css';
 
 createInertiaApp({
   resolve: name => {
+    // ini fungsinya untuk mengimpor komponen halaman secara dinamis
+    // berdasarkan nama yang diberikan. Misalnya, jika nama adalah 'Home',
+    // maka akan mengimpor komponen dari file 'Pages/Home.jsx'.
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true });
     return pages[`./Pages/${name}.jsx`];
   },

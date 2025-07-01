@@ -85,18 +85,17 @@ export default function Login() {
                   <button
                     className="btn btn-primary mb-0 w-100 btn-md"
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading} // Disable button when loading
                   >
+
                     {isLoading ? (
-                      <div
-                        className="spinner-border spinner-border-sm text-light"
-                        role="status"
-                      >
+                      <div className="spinner-border spinner-border-sm text-light" role="status">
                         <span className="visually-hidden">Loading...</span>
                       </div>
                     ) : (
                       'Login'
                     )}
+                    {/* // Show spinner when loading */}
                   </button>
                 </form>
               </div>
