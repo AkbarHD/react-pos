@@ -8,31 +8,43 @@ use Carbon\Carbon;
 
 class Transaction extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'customer_id',
+        'user_id',
+        'store_id',
+        'invoice',
+        'total_amount',
+        'cash',
+        'change',
+        'discount',
+        'payment_method',
+        'payment_link_url',
+        'transaction_date',
+        'status'
+    ];
 
-    // Relasi dengan model Customer
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 
-    // Relasi dengan model TransactionDetail
     public function transactionDetails()
     {
         return $this->hasMany(TransactionDetail::class);
     }
 
-    // Event boot untuk logika tambahan saat model di-create
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
 
-        // Menambahkan logika khusus saat transaksi dibuat
         static::creating(function ($transaction) {
-            // Menghasilkan invoice dengan format INV-YYYYMMDDHHMMSS-RANDOM5
             $transaction->invoice = 'INV-' . now()->format('YmdHis') . '-' . strtoupper(Str::random(5));
 
-            // Menetapkan tanggal transaksi jika belum diisi
             if (empty($transaction->transaction_date)) {
                 $transaction->transaction_date = Carbon::now();
             }

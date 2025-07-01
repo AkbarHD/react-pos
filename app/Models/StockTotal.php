@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class StockTotal extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'product_id',
+        'total_stock'
+    ];
 
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-
 }

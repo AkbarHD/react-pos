@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
             $table->string('invoice')->unique();
             $table->string('total_amount');
             $table->string('cash')->nullable();
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->enum('payment_method', ['cash', 'online'])->default('cash');
             $table->string('payment_link_url')->nullable();
             $table->timestamp('transaction_date')->nullable();
-            $table->enum('status', array('pending', 'success', 'expired', 'failed'))->default('pending');
+            $table->enum('status', ['pending', 'success', 'expired', 'failed'])->default('pending');
             $table->timestamps();
         });
     }

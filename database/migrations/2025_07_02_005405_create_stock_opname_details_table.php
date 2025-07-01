@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('stock_opname_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('stock_opname_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('stock_total_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('stock_opname_id')->constrained('stock_opnames')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('stock_total_id')->constrained('stock_totals')->onDelete('cascade');
             $table->integer('physical_quantity');
             $table->integer('quantity_difference');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

@@ -16,7 +16,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -26,10 +26,11 @@ class User extends Authenticatable
         'warehouse_id',
         'store_id',
     ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -48,11 +49,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    public function getPermissionArray()
+    /**
+     * Relasi ke warehouse (one-to-one).
+     */
+    public function warehouse()
     {
-        return $this->getAllPermissions()->mapWithKeys(function ($permission) {
-            return [$permission->name => true];
-        })->toArray();
+        return $this->belongsTo(Warehouse::class);
+    }
+
+    /**
+     * Relasi ke store (one-to-one).
+     */
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
     }
 }

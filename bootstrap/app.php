@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
+            // fungsinya agar semua request yang masuk ke server akan diarahkan ke file app/Http/Middleware/HandleInertiaRequests.php
             HandleInertiaRequests::class, // ambil dari app/Http/Middleware/HandleInertiaRequests.php
         ]);
 

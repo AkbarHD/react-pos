@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Unit extends Model
+class Provincy extends Model
 {
-   protected $fillable = [
+    protected $fillable = [
         'name'
     ];
 }

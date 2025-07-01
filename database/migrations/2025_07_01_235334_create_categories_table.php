@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stock_totals', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->integer('total_stock')->default(0); // Jumlah stok total yang dapat dipotong oleh transaksi
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('stock_totals');
+        Schema::dropIfExists('categories');
     }
 };
