@@ -23,6 +23,11 @@ return [
         'api_key' => env('RAJAONGKIR_API_KEY'),
     ],
 
+    'imagerecognize' => [
+        'api_key' => env('FACE_API_KEY'),
+    ],
+
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],

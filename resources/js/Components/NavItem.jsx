@@ -5,8 +5,8 @@ import { Link, usePage } from "@inertiajs/react";
 // Menerima props seperti href, icon, label, labelClass (opsional), dan children
 // Jika ada children, akan ditampilkan sebagai sub-menu dalam <ul>
 const NavItem = ({ href, icon, label, labelClass = "", children }) => {
-    const { url } = usePage();
-    const isActive = url.startsWith(href);
+    const { url } = usePage(); // fungsinya untuk mendapatkan URL saat ini dari Inertia.js
+    const isActive = url.startsWith(href); // Mengecek apakah URL saat ini dimulai dengan href yang diberikan
 
     return (
         <li className="nav-item">

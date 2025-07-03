@@ -17,10 +17,10 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         // Statistik utama
-        $totalSales = Transaction::where('status', 'success')->sum('total_amount'); // total penjualan yang sukses
-        $totalTransactions  = Transaction::count(); // total transaksi
-        $totalCustomers     = Customer::count(); // total customer
-        $totalSuppliers     = Supplier::where('status', 'active')->count(); // total supplier aktif
+        $totalSales = Transaction::where('status', 'success')->sum('total_amount');
+        $totalTransactions  = Transaction::count();
+        $totalCustomers     = Customer::count();
+        $totalSuppliers     = Supplier::where('status', 'active')->count();
 
         // Total transaksi per status
         $transactionData = Transaction::select('status', DB::raw('COUNT(*) as count'))
